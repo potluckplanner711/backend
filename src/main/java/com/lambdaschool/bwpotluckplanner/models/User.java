@@ -28,6 +28,10 @@ public class User
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private Set<UserRoles> roles = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    private Set<UserTypes> types = new HashSet<>();
+
     public User()
     {
     }
@@ -101,5 +105,15 @@ public class User
     public void setRoles(Set<UserRoles> roles)
     {
         this.roles = roles;
+    }
+
+    public Set<UserTypes> getTypes()
+    {
+        return types;
+    }
+
+    public void setTypes(Set<UserTypes> types)
+    {
+        this.types = types;
     }
 }
