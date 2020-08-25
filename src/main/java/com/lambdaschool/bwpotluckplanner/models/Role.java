@@ -19,7 +19,7 @@ public class Role
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = "role", allowSetters = true)
-    private Set<UserRoles> user = new HashSet<>();
+    private Set<UserRoles> users = new HashSet<>();
 
     public Role()
     {
@@ -50,13 +50,13 @@ public class Role
         this.name = name;
     }
 
-    public Set<UserRoles> getUser()
+    public Set<UserRoles> getUsers()
     {
-        return user;
+        return users;
     }
 
-    public void setUser(Set<UserRoles> user)
+    public void setUser(Set<UserRoles> users)
     {
-        this.user = user;
+        this.users = users;
     }
 }
