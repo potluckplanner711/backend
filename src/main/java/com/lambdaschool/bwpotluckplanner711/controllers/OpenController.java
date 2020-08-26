@@ -74,7 +74,7 @@ public class OpenController
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("grant_type", "password");
         map.add("scope", "read write trust");
-        map.add("email", newminuser.getEmail());
+        map.add("username", newminuser.getUsername());
         map.add("password", newminuser.getPassword());
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);

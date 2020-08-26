@@ -2,7 +2,7 @@ package com.lambdaschool.bwpotluckplanner711.models;
 
 import javax.validation.constraints.Email;
 
-public class UserMin
+public class UserMin extends Auditable
 {
     private String fname;
     private String lname;

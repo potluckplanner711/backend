@@ -15,7 +15,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User
+public class User extends Auditable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,6 +35,10 @@ public class User
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private Set<UserRoles> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "user", allowSetters = true)
+    private List<Potluck> potlucks = new ArrayList<>();
 
     public User()
     {
@@ -127,6 +131,16 @@ public class User
     public void setRoles(Set<UserRoles> roles)
     {
         this.roles = roles;
+    }
+
+    public List<Potluck> getPotlucks()
+    {
+        return potlucks;
+    }
+
+    public void setPotlucks(List<Potluck> potlucks)
+    {
+        this.potlucks = potlucks;
     }
 
     @JsonIgnore
