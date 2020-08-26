@@ -7,5 +7,5 @@ GET https://sfritz24-bwpotluckplanner711.herokuapp.com/users/users, grabs all us
 
 GET https://sfritz24-bwpotluckplanner711.herokuapp.com/users/userinfo, grabs user data for the spcific user - must use axiosWithAuth.
 
-GET https://sfritz24-bwpotluckplanner711.herokuapp.com/potlucks/potlucks, grabs all potluck data, must use aziosWithAuth.
+GET https://sfritz24-bwpotluckplanner711.herokuapp.com/potlucks/potlucks, grabs all potluck data, must use axiosWithAuth.
 
