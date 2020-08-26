@@ -1,5 +1,8 @@
 package com.lambdaschool.bwpotluckplanner711.service;
 
+import com.lambdaschool.bwpotluckplanner711.exceptions.ResourceFoundException;
+import com.lambdaschool.bwpotluckplanner711.exceptions.ResourceNotFoundException;
+import com.lambdaschool.bwpotluckplanner711.models.Potluck;
 import com.lambdaschool.bwpotluckplanner711.models.Role;
 import com.lambdaschool.bwpotluckplanner711.models.User;
 import com.lambdaschool.bwpotluckplanner711.models.UserRoles;
@@ -21,6 +24,9 @@ public class UserServiceImp implements UserService
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private PotluckService potluckService;
 
     @Override
     public List<User> findAll()
@@ -44,6 +50,7 @@ public class UserServiceImp implements UserService
 
         newUser.setFname(user.getFname().toLowerCase());
         newUser.setLname(user.getLname().toLowerCase());
+        newUser.setUsername(user.getUsername().toLowerCase());
         newUser.setEmail(user.getEmail().toLowerCase());
         newUser.setPassword(user.getPassword());
 
@@ -54,7 +61,37 @@ public class UserServiceImp implements UserService
             newUser.getRoles().add(new UserRoles(newUser, addRole));
         }
 
+        newUser.getPotlucks().clear();
+        for (Potluck pl : user.getPotlucks())
+        {
+            newUser.getPotlucks().add(new Potluck(newUser,
+                    pl.getTitle(),
+                    pl.getDate(),
+                    pl.getTime(),
+                    pl.getAddress(),
+                    pl.getCity(),
+                    pl.getState(),
+                    pl.getZip()));
+        }
+
         return userRepos.save(newUser);
+    }
+
+    @Override
+    public User findByUsername(String username)
+    {
+        User u = userRepos.findByUsername(username.toLowerCase());
+        if (u == null)
+        {
+            throw new ResourceFoundException("Username " + username + " not found!");
+        }
+        return u;
+    }
+
+    @Override
+    public User findByUserId(long id) throws ResourceFoundException
+    {
+        return userRepos.findById(id).orElseThrow(() -> new ResourceNotFoundException("User id " + id + " not found!"));
     }
 
     @Transactional

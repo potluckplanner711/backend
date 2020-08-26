@@ -41,10 +41,13 @@ public class ResourceServerConfig
                         "/swagger-ui.html",
                         "/v2/api-docs",
                         "/webjars/**",
-                        "/createnewuser")
+                        "/createuser",
+                        "/login")
                 .permitAll()
                 .antMatchers("/users/users")
                 .hasAnyRole("ADMIN")
+                .antMatchers("/potlucks/potlucks")
+                .hasAnyRole("ADMIN", "USER")
 //                .antMatchers(HttpMethod.POST,
 //                        "/users/**")
 //                .hasAnyRole("ADMIN")
