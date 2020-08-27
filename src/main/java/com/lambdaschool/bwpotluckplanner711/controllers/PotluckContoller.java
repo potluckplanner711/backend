@@ -91,4 +91,11 @@ public class PotluckContoller
 
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
+
+    @PatchMapping(value = "/potluck/{potluckid}", consumes = "application/json")
+    public ResponseEntity<?> updatePotluck(@PathVariable long potluckid, @RequestBody Potluck updatepotluck)
+    {
+        potluckService.updatePotluck(updatepotluck, potluckid);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
