@@ -11,4 +11,6 @@ GET https://sfritz24-bwpotluckplanner711.herokuapp.com/potlucks/potlucks, grabs 
 
 POST https://sfritz24-bwpotluckplanner711.herokuapp.com/potlucks/users/{userid}/potluck, creates a potluck for a specific user, must use axiosWithAuth and pass in the current userid as a parameter.
 
-POST https://sfritz24-bwpotluckplanner711.herokuapp.com/potlucks/potluck/{potluckid}/items, creats one item for a specific potluck, must use axiosWithAuth and pass in the current potluckid as a parameter.
+POST https://sfritz24-bwpotluckplanner711.herokuapp.com/potlucks/potluck/{potluckid}/items, creates one item for a specific potluck, must use axiosWithAuth and pass in the current potluckid as a parameter.
+
+Post https://sfrtiz24-bwpotluckplanner711.herokuapp.com/potlucks/potluck/{potluckid}/attendee/{userid}, creates an attendee for a specific potluck based on the current user logged in, must be used with axiosWitAuth and pass in the current potluck and user ids as parameters.
