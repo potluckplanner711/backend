@@ -1,10 +1,7 @@
 package com.lambdaschool.bwpotluckplanner711.controllers;
 
 import com.lambdaschool.bwpotluckplanner711.models.*;
-import com.lambdaschool.bwpotluckplanner711.service.AttendeeService;
-import com.lambdaschool.bwpotluckplanner711.service.ItemService;
-import com.lambdaschool.bwpotluckplanner711.service.PotluckService;
-import com.lambdaschool.bwpotluckplanner711.service.UserService;
+import com.lambdaschool.bwpotluckplanner711.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -31,6 +28,9 @@ public class PotluckContoller
 
     @Autowired
     private AttendeeService attendeeService;
+
+    @Autowired
+    private TypeService typeService;
 
     @GetMapping(value = "/potlucks", produces = "application/json")
     public ResponseEntity<?> listAllPotlucks()
@@ -73,12 +73,14 @@ public class PotluckContoller
     }
 
     @PostMapping(value = "/potluck/{potluckid}/attendee/{userid}")
-    public ResponseEntity<?> addNewAttendee(@PathVariable long potluckid, @PathVariable long userid, @RequestBody Type type)
+    public ResponseEntity<?> addNewAttendee(@PathVariable long potluckid, @PathVariable long userid, @RequestBody long typeid)
             throws URISyntaxException
     {
         User currentUser = userService.findByUserId(userid);
 
-        Attendee newAttendee = attendeeService.save(potluckid, currentUser.getFname(), currentUser.getLname(), type, true);
+        Type userType = typeService.findTypeById(typeid);
+
+        Attendee newAttendee = attendeeService.save(potluckid, currentUser.getFname(), currentUser.getLname(), userType, true);
 
         HttpHeaders responseHeaders = new HttpHeaders();
         URI newAtteneeURI = ServletUriComponentsBuilder.fromCurrentRequest()
