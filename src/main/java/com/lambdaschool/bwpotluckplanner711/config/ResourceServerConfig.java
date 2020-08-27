@@ -48,6 +48,11 @@ public class ResourceServerConfig
                 .hasAnyRole("ADMIN")
                 .antMatchers("/potlucks/potlucks")
                 .hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.POST,
+                        "/potlucks/users/**")
+                .authenticated()
+                .antMatchers(HttpMethod.POST, "/potlucks/potluck/**")
+                .authenticated()
 //                .antMatchers(HttpMethod.POST,
 //                        "/users/**")
 //                .hasAnyRole("ADMIN")
