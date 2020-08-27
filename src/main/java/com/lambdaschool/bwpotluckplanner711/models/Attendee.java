@@ -16,9 +16,10 @@ public class Attendee extends Auditable
     private String fname;
     private String lname;
 
-    @OneToMany(mappedBy = "attendee", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = "attendee", allowSetters = true)
-    private Set<AttendeeTypes> types = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "typeid", nullable = false)
+    @JsonIgnoreProperties(value = "attendees", allowSetters = true)
+    private Type type;
 
     private boolean isgoing;
 
@@ -31,12 +32,16 @@ public class Attendee extends Auditable
     {
     }
 
-    public Attendee(String fname,
+    public Attendee(Potluck potluck,
+                    String fname,
                     String lname,
+                    Type type,
                     boolean isgoing)
     {
+        this.potluck = potluck;
         this.fname = fname;
         this.lname = lname;
+        this.type = type;
         this.isgoing = isgoing;
     }
 
@@ -70,14 +75,14 @@ public class Attendee extends Auditable
         this.lname = lname;
     }
 
-    public Set<AttendeeTypes> getTypes()
+    public Type getType()
     {
-        return types;
+        return type;
     }
 
-    public void setTypes(Set<AttendeeTypes> types)
+    public void setType(Type type)
     {
-        this.types = types;
+        this.type = type;
     }
 
     public boolean isIsgoing()
