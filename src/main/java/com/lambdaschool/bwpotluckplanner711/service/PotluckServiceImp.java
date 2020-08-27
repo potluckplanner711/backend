@@ -77,6 +77,52 @@ public class PotluckServiceImp implements PotluckService
 
     @Transactional
     @Override
+    public Potluck updatePotluck(Potluck potluck,
+                                 long id)
+    {
+        User currentUser = userService.findByUserId(findPotluckById(id).getUser().getUserid());
+        Potluck currentPotluck = findPotluckById(id);
+
+        if (helperFunctions.isAuthorizedToMakeChange(currentUser.getUsername()))
+        {
+            if (potluck.getTitle() != null)
+            {
+                currentPotluck.setTitle(potluck.getTitle().toLowerCase());
+            }
+            if (potluck.getDate() != null)
+            {
+                currentPotluck.setDate(potluck.getDate());
+            }
+            if (potluck.getTime() != null)
+            {
+                currentPotluck.setTime(potluck.getTime());
+            }
+            if (potluck.getAddress() != null)
+            {
+                currentPotluck.setAddress(potluck.getAddress().toLowerCase());
+            }
+            if (potluck.getCity() != null)
+            {
+                currentPotluck.setCity(potluck.getCity().toLowerCase());
+            }
+            if (potluck.getState() != null)
+            {
+                currentPotluck.setState(potluck.getState().toLowerCase());
+            }
+            if (potluck.getZip() != 0)
+            {
+                currentPotluck.setZip(potluck.getZip());
+            }
+
+            return potluckRepos.save(currentPotluck);
+        } else
+        {
+            throw new ResourceNotFoundException("This user is not authorized to make change");
+        }
+    }
+
+    @Transactional
+    @Override
     public void deleteAll()
     {
         potluckRepos.deleteAll();

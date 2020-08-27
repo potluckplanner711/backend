@@ -87,7 +87,7 @@ public class SeedData implements CommandLineRunner
         p2.getAttendees().add(new Attendee(p2, u5.getFname(), u5.getLname(), t2, true));
 
         Potluck p3 = u1.getPotlucks().get(0);
-        p3.getAttendees().add(new Attendee(p3, u1.getFname(), u3.getLname(), t1, true));
+        p3.getAttendees().add(new Attendee(p3, u1.getFname(), u1.getLname(), t1, true));
 
         p1.getItems().add(new Item(p1, "Hamburgers", false));
         p1.getItems().add(new Item(p1, "Hotdogs", true));

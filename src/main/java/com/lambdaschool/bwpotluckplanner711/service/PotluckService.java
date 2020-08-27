@@ -12,5 +12,7 @@ public interface PotluckService
 
     Potluck save(long userid, String title, String date, String time, String address, String city, String state, int zip);
 
+    Potluck updatePotluck(Potluck potluck, long id);
+
     public void deleteAll();
 }

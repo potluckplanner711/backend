@@ -14,3 +14,5 @@ POST https://sfritz24-bwpotluckplanner711.herokuapp.com/potlucks/users/{userid}/
 POST https://sfritz24-bwpotluckplanner711.herokuapp.com/potlucks/potluck/{potluckid}/items, creates one item for a specific potluck, must use axiosWithAuth and pass in the current potluckid as a parameter.
 
 Post https://sfritz24-bwpotluckplanner711.herokuapp.com/potlucks/potluck/{potluckid}/attendee/{userid}, creates an attendee for a specific potluck based on the current user logged in, must be used with axiosWitAuth and pass in the current potluck and user ids as parameters.
+
+PATCH https://sfritz24-bwpotluckplanner711.herokuapp.com/potlucks//potluck/{potluckid}, updates potluck information excluding attendees and items, must use axiosWithAuth and you must be the user who created the potluck, need to pass in the current potluckid.
