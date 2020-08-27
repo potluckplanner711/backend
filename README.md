@@ -9,3 +9,4 @@ GET https://sfritz24-bwpotluckplanner711.herokuapp.com/users/userinfo, grabs use
 
 GET https://sfritz24-bwpotluckplanner711.herokuapp.com/potlucks/potlucks, grabs all potluck data, must use axiosWithAuth.
 
+POST https://sfritz24-bwpotluckplanner711.herokuapp.com/potlucks/users/{userid}/potluck, creates a potluck for a specific user, must use axiosWithAuth and pass in the current userid as a parameter.

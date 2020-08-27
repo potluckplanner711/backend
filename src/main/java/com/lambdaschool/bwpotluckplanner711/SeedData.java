@@ -1,12 +1,7 @@
 package com.lambdaschool.bwpotluckplanner711;
 
-import com.lambdaschool.bwpotluckplanner711.models.Potluck;
-import com.lambdaschool.bwpotluckplanner711.models.Role;
-import com.lambdaschool.bwpotluckplanner711.models.User;
-import com.lambdaschool.bwpotluckplanner711.models.UserRoles;
-import com.lambdaschool.bwpotluckplanner711.service.PotluckService;
-import com.lambdaschool.bwpotluckplanner711.service.RoleService;
-import com.lambdaschool.bwpotluckplanner711.service.UserService;
+import com.lambdaschool.bwpotluckplanner711.models.*;
+import com.lambdaschool.bwpotluckplanner711.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -25,6 +20,12 @@ public class SeedData implements CommandLineRunner
     @Autowired
     private PotluckService potluckService;
 
+    @Autowired
+    private AttendeeService attendeeService;
+
+    @Autowired
+    private TypeService typeService;
+
     @Transactional
 
     @Override
@@ -35,12 +36,20 @@ public class SeedData implements CommandLineRunner
         userService.deleteAll();
         roleService.deleteAll();
         potluckService.deleteAll();
+        attendeeService.deleteAll();
+        typeService.deleteAll();
 
         Role r1 = new Role("admin");
         Role r2 = new Role("user");
 
+        Type t1 = new Type("organizer");
+        Type t2 = new Type("guest");
+
         r1 = roleService.save(r1);
         r2 = roleService.save(r2);
+
+        t1 = typeService.save(t1);
+        t2 = typeService.save(t2);
 
         User u1 = new User("Logan", "Metzger", "loganLlama", "logan@metzger.com", "LambdaLlama");
         u1 = userService.save(u1);
@@ -66,5 +75,30 @@ public class SeedData implements CommandLineRunner
         User u5 = new User("Bobby", "Smith", "mrSmith02", "bobby@smith.com", "LambdaLlama");
         u5 = userService.save(u5);
         u5.getRoles().add(new UserRoles(u5, r2));
+
+        Potluck p1 = u4.getPotlucks().get(0);
+        p1.getAttendees().add(new Attendee(p1, u3.getFname(), u3.getLname(), t1, true));
+        p1.getAttendees().add(new Attendee(p1, u4.getFname(), u4.getLname(), t2, true));
+        p1.getAttendees().add(new Attendee(p1, u5.getFname(), u5.getLname(), t1, true));
+
+        Potluck p2 = u4.getPotlucks().get(1);
+        p2.getAttendees().add(new Attendee(p2, u3.getFname(), u3.getLname(), t2, true));
+        p2.getAttendees().add(new Attendee(p2, u4.getFname(), u4.getLname(), t1, true));
+        p2.getAttendees().add(new Attendee(p2, u5.getFname(), u5.getLname(), t2, true));
+
+        Potluck p3 = u1.getPotlucks().get(0);
+        p3.getAttendees().add(new Attendee(p3, u1.getFname(), u3.getLname(), t1, true));
+
+        p1.getItems().add(new Item(p1, "Hamburgers", false));
+        p1.getItems().add(new Item(p1, "Hotdogs", true));
+        p1.getItems().add(new Item(p1, "Pulled Pork", false));
+
+        p2.getItems().add(new Item(p2, "Potato Salad", false));
+        p2.getItems().add(new Item(p2, "Macaroni Salad", false));
+        p2.getItems().add(new Item(p2, "Caeser Salad", true));
+
+        p3.getItems().add(new Item(p3, "Hotdogs", false));
+        p3.getItems().add(new Item(p3, "Potato Salad", false));
+        p3.getItems().add(new Item(p3, "Chocolate Pie", false));
     }
 }

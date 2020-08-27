@@ -1,5 +1,6 @@
 package com.lambdaschool.bwpotluckplanner711.service;
 
+import com.lambdaschool.bwpotluckplanner711.exceptions.ResourceNotFoundException;
 import com.lambdaschool.bwpotluckplanner711.models.Role;
 import com.lambdaschool.bwpotluckplanner711.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class RoleServiceImp implements RoleService
     @Override
     public Role findRoleById(long id)
     {
-        return roleRepos.findById(id).orElseThrow(() -> new EntityNotFoundException("Role id " + id + " not found!"));
+        return roleRepos.findById(id).orElseThrow(() -> new ResourceNotFoundException("Role id " + id + " not found!"));
     }
 
     @Transactional
@@ -27,7 +28,7 @@ public class RoleServiceImp implements RoleService
     {
         if (role.getUsers().size() > 0)
         {
-            throw new EntityNotFoundException("User Roles are not updated through Role.");
+            throw new ResourceNotFoundException("User Roles are not updated through Role.");
         }
 
         return roleRepos.save(role);
@@ -43,7 +44,7 @@ public class RoleServiceImp implements RoleService
             return r;
         } else
         {
-            throw new EntityNotFoundException(name);
+            throw new ResourceNotFoundException("Role name " + name + " not found!");
         }
     }
 

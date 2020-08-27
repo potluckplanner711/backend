@@ -1,6 +1,8 @@
 package com.lambdaschool.bwpotluckplanner711.service;
 
 import com.lambdaschool.bwpotluckplanner711.exceptions.ResourceNotFoundException;
+import com.lambdaschool.bwpotluckplanner711.models.Attendee;
+import com.lambdaschool.bwpotluckplanner711.models.Item;
 import com.lambdaschool.bwpotluckplanner711.models.Potluck;
 import com.lambdaschool.bwpotluckplanner711.models.User;
 import com.lambdaschool.bwpotluckplanner711.repositories.PotluckRepository;
@@ -53,6 +55,19 @@ public class PotluckServiceImp implements PotluckService
         if (helperFunctions.isAuthorizedToMakeChange(currentUser.getUsername()))
         {
             Potluck newPotluck = new Potluck(currentUser, title, date, time, address, city, state, zip);
+
+            newPotluck.getAttendees().clear();
+            for (Attendee ae : newPotluck.getAttendees())
+            {
+                newPotluck.getAttendees().add(new Attendee(ae.getPotluck(), ae.getFname(), ae.getLname(), ae.getType(), ae.isIsgoing()));
+            }
+
+            newPotluck.getItems().clear();
+            for (Item i : newPotluck.getItems())
+            {
+                newPotluck.getItems().add(new Item(i.getPotluck(), i.getItemname(), i.isClaimed()));
+            }
+
             return potluckRepos.save(newPotluck);
         } else
         {

@@ -23,9 +23,11 @@ public class Item extends Auditable
     {
     }
 
-    public Item(String itemname,
+    public Item(Potluck potluck,
+                String itemname,
                 boolean claimed)
     {
+        this.potluck = potluck;
         this.itemname = itemname;
         this.claimed = claimed;
     }
