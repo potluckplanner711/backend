@@ -46,7 +46,7 @@ public class OpenController
         newuser.setLname(newminuser.getLname());
         newuser.setUsername(newminuser.getUsername());
         newuser.setEmail(newminuser.getEmail());
-        newuser.setPassword(newminuser.getPassword());
+        newuser.setPasswordNoEncrypt(newminuser.getPassword());
 
         Set<UserRoles> newRoles = new HashSet<>();
         newRoles.add(new UserRoles(newuser, roleService.findByName("user")));
