@@ -38,6 +38,34 @@ public class ItemServiceImp implements ItemService
         }
     }
 
+    @Override
+    public Item findItemById(long id)
+    {
+        return itemRepos.findById(id).orElseThrow(() -> new ResourceNotFoundException("Item id " + id + " not found!"));
+    }
+
+    @Transactional
+    @Override
+    public Item updateItem(Item item,
+                           long id)
+    {
+        Item currentItem = findItemById(id);
+
+        if (item.getPotluck() != null)
+        {
+            currentItem.setPotluck(item.getPotluck());
+        }
+        if (item.getItemname() != null)
+        {
+            currentItem.setItemname(item.getItemname());
+        }
+        if (item.isClaimed() != true)
+        {
+            currentItem.setClaimed(true);
+        }
+        return itemRepos.save(currentItem);
+    }
+
     @Transactional
     @Override
     public void deleteAll()

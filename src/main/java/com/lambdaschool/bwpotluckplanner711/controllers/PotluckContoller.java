@@ -39,7 +39,7 @@ public class PotluckContoller
         return new ResponseEntity<>(potlucks, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/users/{userid}/potluck")
+    @PostMapping(value = "/users/{userid}/potluck", consumes = "application/json")
     public ResponseEntity<?> addNewPotluck(@PathVariable long userid, @RequestBody Potluck potluck)
             throws URISyntaxException
     {
@@ -56,7 +56,7 @@ public class PotluckContoller
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
-    @PostMapping(value = "/potluck/{potluckid}/items")
+    @PostMapping(value = "/potluck/{potluckid}/items", consumes = "application/json")
     public ResponseEntity<?> addNewItem(@PathVariable long potluckid, @RequestBody Item item)
         throws URISyntaxException
     {
@@ -72,7 +72,7 @@ public class PotluckContoller
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
-    @PostMapping(value = "/potluck/{potluckid}/attendee/{userid}")
+    @PostMapping(value = "/potluck/{potluckid}/attendee/{userid}", consumes = "application/json")
     public ResponseEntity<?> addNewAttendee(@PathVariable long potluckid, @PathVariable long userid, @RequestBody long typeid)
             throws URISyntaxException
     {

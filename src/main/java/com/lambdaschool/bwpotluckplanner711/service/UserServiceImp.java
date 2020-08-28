@@ -52,7 +52,7 @@ public class UserServiceImp implements UserService
         newUser.setLname(user.getLname().toLowerCase());
         newUser.setUsername(user.getUsername().toLowerCase());
         newUser.setEmail(user.getEmail().toLowerCase());
-        newUser.setPassword(user.getPassword());
+        newUser.setPasswordNoEncrypt(user.getPassword());
 
         newUser.getRoles().clear();
         for (UserRoles ur : user.getRoles())
@@ -83,7 +83,7 @@ public class UserServiceImp implements UserService
         User u = userRepos.findByUsername(username.toLowerCase());
         if (u == null)
         {
-            throw new ResourceFoundException("Username " + username + " not found!");
+            throw new ResourceNotFoundException("Username " + username + " not found!");
         }
         return u;
     }

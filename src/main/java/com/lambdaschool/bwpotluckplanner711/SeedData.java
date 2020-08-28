@@ -77,9 +77,9 @@ public class SeedData implements CommandLineRunner
         u5.getRoles().add(new UserRoles(u5, r2));
 
         Potluck p1 = u4.getPotlucks().get(0);
-        p1.getAttendees().add(new Attendee(p1, u3.getFname(), u3.getLname(), t1, true));
-        p1.getAttendees().add(new Attendee(p1, u4.getFname(), u4.getLname(), t2, true));
-        p1.getAttendees().add(new Attendee(p1, u5.getFname(), u5.getLname(), t1, true));
+        p1.getAttendees().add(new Attendee(p1, u3.getFname(), u3.getLname(), t2, true));
+        p1.getAttendees().add(new Attendee(p1, u4.getFname(), u4.getLname(), t1, true));
+        p1.getAttendees().add(new Attendee(p1, u5.getFname(), u5.getLname(), t2, true));
 
         Potluck p2 = u4.getPotlucks().get(1);
         p2.getAttendees().add(new Attendee(p2, u3.getFname(), u3.getLname(), t2, true));
